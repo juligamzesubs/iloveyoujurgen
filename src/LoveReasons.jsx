@@ -71,7 +71,7 @@ export default function LoveReasons() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-pink-50 text-center relative">
-      <audio ref={audioRef} loop muted>
+      <audio ref={audioRef} loop>
         <source src="/those-eyes.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
