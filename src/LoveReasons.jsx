@@ -63,7 +63,6 @@ export default function LoveReasons() {
   const nextReason = () => {
     setIndex((prev) => (prev + 1) % reasons.length);
     if (!hasPlayed && audioRef.current) {
-      audioRef.current.muted = false;
       audioRef.current.play();
       setHasPlayed(true);
     }
@@ -82,9 +81,13 @@ export default function LoveReasons() {
         <CardContent className="p-6 text-lg font-medium">
           <p className="mb-4">❤️ {reasons[index]}</p>
           <Button onClick={nextReason}>Next Reason</Button>
+          <div className="mt-4">
+            <Button variant="outline" onClick={() => audioRef.current?.play()}>
+              🔊 Play Music
+            </Button>
+          </div>
         </CardContent>
       </Card>
     </div>
   );
 }
-
