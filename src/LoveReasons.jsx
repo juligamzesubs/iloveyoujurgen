@@ -1,5 +1,6 @@
-
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 const reasons = [
   "Because you always know how to make me smile.",
@@ -56,26 +57,34 @@ const reasons = [
 
 export default function LoveReasons() {
   const [index, setIndex] = useState(0);
+  const audioRef = useRef(null);
+  const [hasPlayed, setHasPlayed] = useState(false);
 
   const nextReason = () => {
     setIndex((prev) => (prev + 1) % reasons.length);
+    if (!hasPlayed && audioRef.current) {
+      audioRef.current.muted = false;
+      audioRef.current.play();
+      setHasPlayed(true);
+    }
   };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-pink-50 text-center relative">
-      <audio autoPlay loop>
-        <source src='/those-eyes.mp3' type="audio/mpeg" />
+      <audio ref={audioRef} loop muted>
+        <source src="/those-eyes.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
       <h1 className="text-3xl font-bold mb-6 text-rose-600">
         Happy Birthday Jurgen! 🎉
       </h1>
-      <div className="max-w-xl w-full shadow-xl bg-white rounded-xl p-6 text-lg font-medium">
-        <p className="mb-4">❤️ {reasons[index]}</p>
-        <button onClick={nextReason} className="mt-4 bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded">
-          Next Reason
-        </button>
-      </div>
+      <Card className="max-w-xl w-full shadow-xl bg-white">
+        <CardContent className="p-6 text-lg font-medium">
+          <p className="mb-4">❤️ {reasons[index]}</p>
+          <Button onClick={nextReason}>Next Reason</Button>
+        </CardContent>
+      </Card>
     </div>
   );
 }
+
