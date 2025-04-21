@@ -82,9 +82,19 @@ export default function LoveReasons() {
           <p className="mb-4">❤️ {reasons[index]}</p>
           <Button onClick={nextReason}>Next Reason</Button>
           <div className="mt-4">
-            <Button variant="outline" onClick={() => audioRef.current?.play()}>
+            <button
+              onClick={() => audioRef.current?.play()}
+              style={{
+                marginTop: '16px',
+                padding: '10px 20px',
+                border: '1px solid #ccc',
+                borderRadius: '8px',
+                backgroundColor: 'white',
+                cursor: 'pointer'
+              }}
+            >
               🔊 Play Music
-            </Button>
+            </button>
           </div>
         </CardContent>
       </Card>
